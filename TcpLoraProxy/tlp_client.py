@@ -6,7 +6,8 @@ import sys
 import time
 import threading
 
-import emuloractp
+import config
+import lsp.loractp as loractp
 PROXYPORT = 38180
 
 NOHANDSHAKE = {'IP': 'localhost', 'port': '5001'}
@@ -63,7 +64,7 @@ def fromclienttoloractp(sock):
 
 if __name__ == "__main__":
 
-    ctpc = emuloractp.CTPendpoint()
+    ctpc = loractp.CTPendpoint(port=config.serial_port)
     myaddr, rcvraddr, quality, result = ctpc.connect()
     if (result == 0):
         debug_print("connected via LoRa to {} myaddr = {}, quality {}".format(rcvraddr, myaddr, quality))

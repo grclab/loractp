@@ -6,7 +6,8 @@ import sys
 import time
 import threading
 
-import emuloractp
+import config
+import lsp.loractp as loractp
 PROXYPORT = 38180
 
 
@@ -52,7 +53,7 @@ def fromservertoloractp(sock):
 
 if __name__ == "__main__":
 
-    ctpc = emuloractp.CTPendpoint()
+    ctpc = loractp.CTPendpoint(port=config.serial_port)
     myaddr, rcvraddr, status = ctpc.listen()
     if (status == 0):
         debug_print("connection from {} to me ({})".format(rcvraddr, myaddr))
