@@ -102,7 +102,7 @@ if __name__ == "__main__":
         # end handshake
 
         # handling in/out data in two separate threads    
-        print("handling in/out data in two separate threads")    
+        # print("handling in/out data in two separate threads")    
         t = threading.Thread(name="fromclient2loractp", target=fromclienttoloractp, args=(connection,) )
         t.start()
         # fromloractp2client
