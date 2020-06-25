@@ -28,7 +28,7 @@ def loractp_send(addr, pload):
 def loractp_recv(rcvraddr):
     try:
         rcvd_data, addr = ctpc.recvit(rcvraddr)
-        # print("got {} from {}".format(rcvd_data, addr))
+        debug_print("loractp_recv: got {} from {}".format(rcvd_data, addr))
         return rcvd_data
     except Exception as e:
         print ("EXCEPTION when receiving ->", e)
@@ -45,9 +45,9 @@ def fromservertoloractp(sock, rcvraddr):
                 # either 0 or end of data
                 break
         indata = b"".join(data)
-        # debug_print('received {!r}'.format(indata))
+        debug_print('fromservertoloractp: received {!r}'.format(indata))
 
-        # debug_print('sending ', bdata)
+        debug_print('fromservertoloractp: sending ', bdata)
         loractp_send(rcvraddr, indata)
 
 
