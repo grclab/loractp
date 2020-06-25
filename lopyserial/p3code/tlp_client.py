@@ -23,6 +23,7 @@ def debug_print(*msg):
     print()
 
 def loractp_send(addr, pload):
+    debug_print('loractp_send to {} :  {}'.format(addr, pload))
     try:
         addr, quality, result = ctpc.sendit(addr, pload)
         # print("ACK from {} (quality = {}, result {})".format(addr, quality, result))
