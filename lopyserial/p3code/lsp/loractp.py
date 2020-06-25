@@ -134,7 +134,7 @@ class CTPendpoint:
         # Shortening addresses to last 8 bytes to save space in packet
         sndr_addr = sndr_addr[8:]
         rcvr_addr = rcvr_addr[8:]
-        if self.DEBUG_MODE: print ("DEBUG 138: sndr_addr, rcvr_addr", sndr_addr, rcvr_addr)
+        if self.DEBUG_MODE: print ("DEBUG 138 _csend: payload, sndr_addr, rcvr_addr", payload, sndr_addr, rcvr_addr)
 
         # computing payload (content) size as "totptbs" = total packets to be sent
         if (len(payload)==0): print ("WARNING csend: payload size == 0... continuing")
