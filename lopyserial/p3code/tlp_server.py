@@ -34,7 +34,7 @@ def loractp_recv(rcvraddr):
         print ("EXCEPTION when receiving ->", e)
         sys.exit()
 
-def fromservertoloractp(sock):
+def fromservertoloractp(sock, rcvraddr):
     while True:
         BUFF_SIZE = 128
         data = []
@@ -83,7 +83,7 @@ if __name__ == "__main__":
     # end handshake
 
     # handling data in two seprate threads    
-    t = threading.Thread(target=fromservertoloractp, args=(sock,))
+    t = threading.Thread(target=fromservertoloractp, args=(sock, rcvraddr))
     t.start()
     while True:
         rcvd_data = loractp_recv(rcvraddr)
