@@ -40,6 +40,7 @@ def loractp_recv(rcvraddr):
 
 
 def fromclienttoloractp(sock, rcvraddr):
+	debug_print('fromclienttoloractp  {}'.format(rcvraddr))
     while True:
         BUFF_SIZE = 128
         data = []
