@@ -39,7 +39,7 @@ def loractp_recv(rcvraddr):
         sys.exit()
 
 
-def fromclienttoloractp(sock):
+def fromclienttoloractp(sock, rcvraddr):
     while True:
         BUFF_SIZE = 128
         data = []
@@ -103,7 +103,7 @@ if __name__ == "__main__":
 
         # handling in/out data in two separate threads    
         # print("handling in/out data in two separate threads")    
-        t = threading.Thread(name="fromclient2loractp", target=fromclienttoloractp, args=(connection,) )
+        t = threading.Thread(name="fromclient2loractp", target=fromclienttoloractp, args=(connection, rcvraddr) )
         t.start()
         # fromloractp2client
         while True:
