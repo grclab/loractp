@@ -153,7 +153,7 @@ class CTPendpoint:
 
         # the_sock.settimeout(5)      # 5 seconds initial timeout... LoRa is slow
         r = seriallopy.writeread(b"settimeout"+bytes(struct.pack("f", 5) ))
-        if self.HARD_DEBUG_MODE: print("LORACTP157 received: ", r)
+        if self.HARD_DEBUG_MODE: print("DEBUG 157: (seriallopy.writeread(b"settimeout") received: ", r)
 
         # stop and wait
         seqnum = self.ZERO
@@ -241,7 +241,7 @@ class CTPendpoint:
         next_acknum = self.ONE
         # the_sock.settimeout(5)      # 5 seconds initial timeout... LoRa is slow
         r = seriallopy.writeread(b"settimeout"+bytes(struct.pack("f", 5) ))
-        if self.HARD_DEBUG_MODE: print("LORACTP242 received: ", r)
+        if self.HARD_DEBUG_MODE: print("DEBUG 244: (seriallopy.writeread(b"settimeout")  received: ", r)
 
         if (snd_addr == self.ANY_ADDR) or (snd_addr == b''): SENDER_ADDR_KNOWN = False
         while True:
