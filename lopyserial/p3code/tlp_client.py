@@ -60,6 +60,7 @@ def fromclienttoloractp(sock, rcvraddr):
                 # either 0 or end of data
                 break
         indata = b"".join(data)
+        debug_print('received this data to send via proxy', indata)
         loractp_send(rcvraddr, indata)
 
 if __name__ == "__main__":
@@ -103,7 +104,7 @@ if __name__ == "__main__":
 
         # handling in/out data in two separate threads    
         # print("handling in/out data in two separate threads")    
-        t = threading.Thread(name="fromclient2loractp", target=fromclienttoloractp, args=(connection, rcvraddr) )
+        t = threading.Thread(name="fromclient2loractp", target=fromclienttoloractp, args=(connection, rcvraddr, ) )
         t.start()
         # fromloractp2client
         while True:

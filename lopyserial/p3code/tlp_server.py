@@ -83,7 +83,7 @@ if __name__ == "__main__":
     # end handshake
 
     # handling data in two seprate threads    
-    t = threading.Thread(target=fromservertoloractp, args=(sock, rcvraddr))
+    t = threading.Thread(target=fromservertoloractp, args=(sock, rcvraddr, ))
     t.start()
     while True:
         rcvd_data = loractp_recv(rcvraddr)
