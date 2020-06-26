@@ -24,8 +24,8 @@ __version__ = '0'
 class CTPendpoint:
 
     # Set to True for debugging messages
-    DEBUG_MODE = True
-    HARD_DEBUG_MODE = True
+    DEBUG_MODE = False
+    HARD_DEBUG_MODE = False
 
     MAX_PKT_SIZE = 222  # Maximum pkt size in LoRa with Spread Factor 7  (maybe 230???)
     HEADER_SIZE  = 20
@@ -167,7 +167,7 @@ class CTPendpoint:
             payload  = payload[self.PAYLOAD_SIZE:]   # Shifting the input string
 
             packet = self.__make_packet(sndr_addr, rcvr_addr, seqnum, acknum, self.ITS_DATA_PACKET, last_pkt, blocktbs)
-            if self.DEBUG_MODE: self.__debug_printpacket("150: sending packet", packet)
+            if self.DEBUG_MODE: self.__debug_printpacket("170: sending packet", packet)
 
             # trying 3 times
             keep_trying = 3
