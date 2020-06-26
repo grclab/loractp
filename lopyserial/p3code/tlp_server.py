@@ -35,7 +35,7 @@ def loractp_recv(rcvraddr):
         print ("EXCEPTION when receiving ->", e)
         sys.exit()
 
-def fromservertoloractp(sock, rcvraddr):
+def fromservertoloractp(sock):
     while True:
         BUFF_SIZE = 128
         data = []
