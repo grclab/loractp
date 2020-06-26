@@ -56,6 +56,7 @@ if __name__ == "__main__":
     myaddr, rcvraddr, status = ctpc.listen()
     if (status == 0):
         debug_print("connection from {} to me ({})".format(rcvraddr, myaddr))
+        debug_print("READY")
     else:
         debug_print("failed connection from {} to me ({})".format(rcvraddr, myaddr))
 
@@ -73,7 +74,7 @@ if __name__ == "__main__":
         server_address = (conndata["IP"], int(conndata["port"]))
         debug_print('connecting to {} port {}'.format(*server_address))
         sock.connect(server_address)
-        debug_print("CONNECTED")
+        debug_print("CONNECTED!")
         # loractp_send(rcvraddr, b"CONNECTED\n")
     except Exception as e:
         debug_print("Exception connecting to requested server!", e)

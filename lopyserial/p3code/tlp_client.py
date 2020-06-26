@@ -70,6 +70,7 @@ if __name__ == "__main__":
     myaddr, rcvraddr, quality, result = ctpc.connect()
     if (result == 0):
         debug_print("connected via LoRa to {} myaddr = {}, quality {}".format(rcvraddr, myaddr, quality))
+        debug_print("READY")
     else:
         debug_print("failed connection via LoRa to {} myaddr = {}, quality {}".format(rcvraddr, myaddr, quality))
 
@@ -84,7 +85,7 @@ if __name__ == "__main__":
         # Listen for incoming connections
         debug_print('waiting for a proxy request connection')
         connection, client_address = sock.accept()
-        debug_print('got request connection from', client_address)
+        debug_print('CONNECTION from', client_address)
 
         # start handshake
         # waiting remote server data in the format:
