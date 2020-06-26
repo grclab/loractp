@@ -107,7 +107,7 @@ if __name__ == "__main__":
 
         while True:
             indata = fromclienttoloractp(connection)
-            if indata == CLOSECONN:
+            if CLOSECONN in indata:
                 connection.close()
                 loractp_send(rcvraddr, CLOSECONN)
                 break

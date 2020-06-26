@@ -84,7 +84,7 @@ if __name__ == "__main__":
     # handling data 
     while True:
         rcvd_data = loractp_recv(rcvraddr)
-        if rcvd_data == CLOSECONN:
+        if CLOSECONN in rcvd_data:
             sock.close()
             break
         try: 
