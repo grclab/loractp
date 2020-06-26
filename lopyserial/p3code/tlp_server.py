@@ -10,6 +10,7 @@ import config
 import lsp.loractp as loractp
 PROXYPORT = 38180
 
+CLOSECONN = b"{'connection': 'CLOSE'}"
 
 def debug_print(*msg):
     print ("tlp_server: ", end = '')
@@ -46,9 +47,7 @@ def fromservertoloractp(sock, rcvraddr):
                 break
         indata = b"".join(data)
         debug_print('fromservertoloractp: received {!r}'.format(indata))
-
-        debug_print('fromservertoloractp: sending ', bdata)
-        loractp_send(rcvraddr, indata)
+        return indata
 
 
 if __name__ == "__main__":
@@ -82,9 +81,25 @@ if __name__ == "__main__":
         # loractp_send(rcvraddr, b"FAILED\n")
     # end handshake
 
-    # handling data in two seprate threads    
-    t = threading.Thread(target=fromservertoloractp, args=(sock, rcvraddr, ))
-    t.start()
+    # handling data 
     while True:
         rcvd_data = loractp_recv(rcvraddr)
-        sock.sendall(rcvd_data)
+        if rcvd_data == CLOSECONN:
+            sock.close()
+            break
+        try: 
+            sock.sendall(rcvd_data)
+        except BrokenPipeError:
+            print("BrokenPipeError")
+            sock.close()
+            break
+        except Exception as e:
+            print ("Exception handling in/out data...", e)
+            sock.close()
+            break
+        indata = fromservertoloractp(sock)
+        loractp_send(rcvraddr, indata)
+
+
+
+

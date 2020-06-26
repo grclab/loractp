@@ -11,6 +11,7 @@ import lsp.loractp as loractp
 PROXYPORT = 38180
 
 NOHANDSHAKE = {'IP': 'localhost', 'port': '5001'}
+CLOSECONN = b"{'connection': 'CLOSE'}"
 # NOHANDSHAKE = {'IP': 'www.grc.upv.es', 'port': '80'}
 # from struct import *
 # pack('!cc2c4cs', )
@@ -40,8 +41,7 @@ def loractp_recv(rcvraddr):
         sys.exit()
 
 
-def fromclienttoloractp(sock, rcvraddr):
-    debug_print('fromclienttoloractp  {}'.format(rcvraddr))
+def fromclienttoloractp(sock):
     while True:
         BUFF_SIZE = 128
         data = []
@@ -62,8 +62,7 @@ def fromclienttoloractp(sock, rcvraddr):
                 # either 0 or end of data
                 break
         indata = b"".join(data)
-        debug_print('received this data to send via proxy', indata)
-        loractp_send(rcvraddr, indata)
+        return indata
 
 if __name__ == "__main__":
 
@@ -83,9 +82,9 @@ if __name__ == "__main__":
 
     while True:
         # Listen for incoming connections
-        debug_print('waiting for a proxy connection')
+        debug_print('waiting for a proxy request connection')
         connection, client_address = sock.accept()
-        debug_print('connection from', client_address)
+        debug_print('got request connection from', client_address)
 
         # start handshake
         # waiting remote server data in the format:
@@ -104,14 +103,18 @@ if __name__ == "__main__":
             sys.exit()
         # end handshake
 
-        # handling in/out data in two separate threads    
-        # print("handling in/out data in two separate threads")    
-        t = threading.Thread(name="fromclient2loractp", target=fromclienttoloractp, args=(connection, rcvraddr, ) )
-        t.start()
-        # fromloractp2client
+        # handling in/out data in using a request/response pattern    
+
         while True:
+            indata = fromclienttoloractp(connection)
+            if indata == CLOSECONN:
+                connection.close()
+                loractp_send(rcvraddr, CLOSECONN)
+                break
+
+            loractp_send(rcvraddr, indata)
+            rcvd_data = loractp_recv(rcvraddr)  
             try: 
-                rcvd_data = loractp_recv(rcvraddr)
                 connection.sendall(rcvd_data)
             except BrokenPipeError:
                 print("BrokenPipeError")
