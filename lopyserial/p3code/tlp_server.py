@@ -85,6 +85,7 @@ if __name__ == "__main__":
     while True:
         rcvd_data = loractp_recv(rcvraddr)
         if CLOSECONN in rcvd_data:
+            print ("Closing connection...")
             sock.close()
             break
         try: 
