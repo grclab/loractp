@@ -151,7 +151,7 @@ class CTPendpoint:
         estimated_rtt  = -1
         dev_rtt        =  1
 
-        the_sock.settimeout(5)      # 5 seconds initial timeout... LoRa is slow
+        # the_sock.settimeout(5)      # 5 seconds initial timeout... LoRa is slow
         r = seriallopy.writeread(b"settimeout"+bytes(struct.pack("f", 5) ))
         if self.HARD_DEBUG_MODE: print("DEBUG 157: (seriallopy.writeread(settimeout) received: ", r)
 
