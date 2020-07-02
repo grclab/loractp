@@ -212,7 +212,7 @@ class CTPendpoint:
             else:
                 estimated_rtt = estimated_rtt * 0.875 + sample_rtt * 0.125
             dev_rtt = 0.75 * dev_rtt + 0.25 * abs(sample_rtt - estimated_rtt)
-            the_sock.settimeout(estimated_rtt + 4 * dev_rtt)
+            # the_sock.settimeout(estimated_rtt + 4 * dev_rtt)
             r = seriallopy.writeread(b"settimeout"+bytes(struct.pack("f", estimated_rtt + 4 * dev_rtt)) )
             print("settimeout received: ", r)
 
