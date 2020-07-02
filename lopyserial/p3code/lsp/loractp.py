@@ -239,7 +239,7 @@ class CTPendpoint:
         rcvd_data = b''
 
         next_acknum = self.ONE
-        the_sock.settimeout(5)      # 5 seconds initial timeout... LoRa is slow
+        # the_sock.settimeout(5)      # 5 seconds initial timeout... LoRa is slow
         r = seriallopy.writeread(b"settimeout"+bytes(struct.pack("f", 5) ))
         if self.HARD_DEBUG_MODE: print("DEBUG 244: (seriallopy.writeread(settimeout)  received: ", r)
 
