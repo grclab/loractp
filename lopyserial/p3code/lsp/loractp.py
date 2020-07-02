@@ -151,9 +151,9 @@ class CTPendpoint:
         estimated_rtt  = -1
         dev_rtt        =  1
 
-        # the_sock.settimeout(5)      # 5 seconds initial timeout... LoRa is slow
-        # r = seriallopy.writeread(b"settimeout"+bytes(struct.pack("f", 5) ))
-        # if self.HARD_DEBUG_MODE: print("DEBUG 157: (seriallopy.writeread(settimeout) received: ", r)
+        the_sock.settimeout(5)      # 5 seconds initial timeout... LoRa is slow
+        r = seriallopy.writeread(b"settimeout"+bytes(struct.pack("f", 5) ))
+        if self.HARD_DEBUG_MODE: print("DEBUG 157: (seriallopy.writeread(settimeout) received: ", r)
 
         # stop and wait
         seqnum = self.ZERO
@@ -212,9 +212,9 @@ class CTPendpoint:
             else:
                 estimated_rtt = estimated_rtt * 0.875 + sample_rtt * 0.125
             dev_rtt = 0.75 * dev_rtt + 0.25 * abs(sample_rtt - estimated_rtt)
-            # the_sock.settimeout(estimated_rtt + 4 * dev_rtt)
-            # r = seriallopy.writeread(b"settimeout"+bytes(struct.pack("f", estimated_rtt + 4 * dev_rtt)) )
-            # print("settimeout received: ", r)
+            the_sock.settimeout(estimated_rtt + 4 * dev_rtt)
+            r = seriallopy.writeread(b"settimeout"+bytes(struct.pack("f", estimated_rtt + 4 * dev_rtt)) )
+            print("settimeout received: ", r)
 
             if self.DEBUG_MODE: print ("202: setting timeout to", estimated_rtt + 4 * dev_rtt)
 
@@ -239,9 +239,9 @@ class CTPendpoint:
         rcvd_data = b''
 
         next_acknum = self.ONE
-        # the_sock.settimeout(5)      # 5 seconds initial timeout... LoRa is slow
-        # r = seriallopy.writeread(b"settimeout"+bytes(struct.pack("f", 5) ))
-        # if self.HARD_DEBUG_MODE: print("DEBUG 244: (seriallopy.writeread(settimeout)  received: ", r)
+        the_sock.settimeout(5)      # 5 seconds initial timeout... LoRa is slow
+        r = seriallopy.writeread(b"settimeout"+bytes(struct.pack("f", 5) ))
+        if self.HARD_DEBUG_MODE: print("DEBUG 244: (seriallopy.writeread(settimeout)  received: ", r)
 
         if (snd_addr == self.ANY_ADDR) or (snd_addr == b''): SENDER_ADDR_KNOWN = False
         while True:
