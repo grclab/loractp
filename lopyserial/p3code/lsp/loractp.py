@@ -24,6 +24,7 @@ __version__ = '0'
 class CTPendpoint:
 
     # Set to True for debugging messages
+    DEBUG_INFO_MODE = True
     DEBUG_MODE = False
     HARD_DEBUG_MODE = False
 
@@ -187,6 +188,7 @@ class CTPendpoint:
                     # Check if valid...
                     if (ack_is_ack) and (ack_acknum == seqnum) and (sndr_addr == ack_daddr) and (rcvr_addr == ack_saddr):
                         stats_psent   += 1
+                        if self.DEBUG_INFO_MODE: print("INFO loractp: sent packet ", stats_psent, " of ", totptbs)
                         # No more need to retry
                         break
                     else:
@@ -214,7 +216,6 @@ class CTPendpoint:
             dev_rtt = 0.75 * dev_rtt + 0.25 * abs(sample_rtt - estimated_rtt)
             # the_sock.settimeout(estimated_rtt + 4 * dev_rtt)
             r = seriallopy.writeread(b"settimeout"+bytes(struct.pack("f", estimated_rtt + 4 * dev_rtt)) )
-            print("settimeout received: ", r)
 
             if self.DEBUG_MODE: print ("202: setting timeout to", estimated_rtt + 4 * dev_rtt)
 
