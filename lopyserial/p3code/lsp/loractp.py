@@ -189,11 +189,14 @@ class CTPendpoint:
                     if (ack_is_ack) and (ack_acknum == seqnum) and (sndr_addr == ack_daddr) and (rcvr_addr == ack_saddr):
                         stats_psent   += 1
                         if self.DEBUG_INFO_MODE: print("INFO loractp: sent packet ", stats_psent, " of ", totptbs)
+                        if self.DEBUG_INFO_MODE: print("\t elapsed time ", recv_time-send_time)
+                        if self.DEBUG_INFO_MODE: print("\t bps ", len(packet)/(recv_time-send_time))
                         # No more need to retry
                         break
                     else:
                         # Received packet not valid
                         if self.DEBUG_MODE: print ("ERROR: ACK received not valid")
+                        if self.DEBUG_INFO_MODE: print ("INFO loractp ERROR: ACK received not valid")
 
                 if self.DEBUG_MODE: self.__debug_printpacket("re-sending packet", packet)
                 if self.DEBUG_MODE: print ("DEBUG 183: attempt number: ", keep_trying)
