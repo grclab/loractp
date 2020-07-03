@@ -64,7 +64,7 @@ while True:
         break
     t1 = time.time()
     print ("ping.py: elapsed time = ", t1-t0)
-    print ("ping.py: bw [b/sec] = ", dsel/(t1-t0))
+    print ("ping.py: bw [bps] = ", dsel/(t1-t0)*8)
 
 
     if input("Q to exit: ") == "Q": break
