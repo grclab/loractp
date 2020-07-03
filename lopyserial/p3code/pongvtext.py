@@ -2,6 +2,7 @@ import json
 import math
 import random
 import time
+import string
 
 import config
 import lsp.loractp as loractp

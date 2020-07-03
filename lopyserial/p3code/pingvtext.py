@@ -33,6 +33,7 @@ while True:
     tbs_ = {"type": "PING", "value": random_chars_string(config.test_string_length), "time": time.time()}
     tbsj = json.dumps(tbs_)
     tbsb = str.encode(tbsj)
+    dsel =  len(tbsb)
     print('ping.py: sending ', tbsb)
     try:
         # sendit(addr=ANY_ADDR, payload=b''):
@@ -62,7 +63,7 @@ while True:
         print ("ping.py: EXCEPTION when receiving ->", e)
         break
     t1 = time.time()
-    print ("ping.py: elapsed time = ", t1-t0)
+    print ("ping.py: elapsed time = ", dsel/(t1-t0))
 
 
     if input("Q to exit: ") == "Q": break
