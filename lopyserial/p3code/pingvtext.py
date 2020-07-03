@@ -63,7 +63,8 @@ while True:
         print ("ping.py: EXCEPTION when receiving ->", e)
         break
     t1 = time.time()
-    print ("ping.py: elapsed time = ", dsel/(t1-t0))
+    print ("ping.py: elapsed time = ", t1-t0)
+    print ("ping.py: bw [b/sec] = ", dsel/(t1-t0))
 
 
     if input("Q to exit: ") == "Q": break
