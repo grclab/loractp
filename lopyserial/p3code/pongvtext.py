@@ -29,7 +29,7 @@ while True:
         print ("pong.py: EXCEPTION!! ", e)
         break
 
-    tbs = {"type": "PONG", "value": random_in_range(), "time": time.time()}
+    tbs = {"type": "PONG", "value": random_chars_string(), "time": time.time()}
     tbsj = json.dumps(tbs)
     tbsb = str.encode(tbsj)
     print('pong.py: sending ', tbsb)
